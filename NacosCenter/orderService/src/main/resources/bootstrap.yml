@@ -1,0 +1,75 @@
+spring:
+  application:
+    name: order-service
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+      config:
+        server-addr: localhost:8848
+        file-extension: properties
+        # namespace: d82031f5-d3cc-4e25-90da-39e97e645c9b
+        group: DEFAULT_GROUP
+      #group: devGroup
+  profiles:
+    active: dev
+
+  datasource:
+    username: root
+    password: feng02140.0
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/study?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml #指定映射文件路径
+
+# seata 配置， 代替file.conf和registry.conf配置
+# seata 配置， 代替file.conf和registry.conf配置
+sfs:
+  nacos:
+    server-addr: 127.0.0.1:8848
+
+seata:
+  application-id: order-service
+  tx-service-group: order-service
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: 127.0.0.1:8848
+      username: nacos
+      password: nacos
+      group: DEFAULT_GROUP
+      namespace:
+  config:
+    type: nacos
+    nacos:
+      server-addr: 127.0.0.1:8848
+      username: nacos
+      password: nacos
+      group: DEFAULT_GROUP
+      namespace:
+  service:
+    vgroupMapping:
+      order-service: default
+
+
+
+#禁用hystrix导致启动失败
+feign:
+  hystrix:
+    enabled: false

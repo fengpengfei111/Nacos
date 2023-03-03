@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>NacosCenter</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>NacosCenter</name>
+    <description>NacosCenter</description>
+    <packaging>pom</packaging>
+    <properties>
+        <java.version>8</java.version>
+        <seata.version>1.6.1</seata.version>
+    </properties>
+    <modules>
+        <module>orderService</module>
+        <module>storeService</module>
+        <module>accountService</module>
+        <module>gatewayService</module>
+    </modules>
+    <dependencyManagement>
+        <dependencies>
+            <!--Spring boot 依赖(定义了微服务规范)-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.3.12.RELEASE</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!--Spring Cloud 依赖(定义了微服务规范)-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Hoxton.SR12</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!--Spring Cloud Alibaba依赖(基于spring微服务规范做了具体落地实现)-->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>2.2.10-RC1</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
+            <dependency>
+                <groupId>io.seata</groupId>
+                <artifactId>seata-all</artifactId>
+                <version>${seata.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+<!--    <build>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
+
+</project>

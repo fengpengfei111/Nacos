@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.storeservice.mapper.StoreMapper">
+    <resultMap id="BaseResultMap" type="com.example.storeservice.bean.Store">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="store_id" jdbcType="INTEGER" property="storeId"/>
+        <result column="count" jdbcType="INTEGER" property="count"/>
+        <result column="price" jdbcType="INTEGER" property="price"/>
+    </resultMap>
+
+    <select id="getStore" parameterType="com.example.storeservice.bean.Ticker" resultMap="BaseResultMap">
+
+        select *
+        from store
+        where store_id = #{storeId};
+
+    </select>
+
+    <update id="updateStore" parameterType="com.example.storeservice.bean.Store">
+        update store
+        <set >
+            <if test="count != null" >
+                count= #{count},
+            </if>
+            <if test="price != null" >
+                price= #{price},
+            </if>
+        </set>
+        where store_id = #{storeId}
+
+    </update>
+</mapper>
